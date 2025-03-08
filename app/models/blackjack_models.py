@@ -5,6 +5,6 @@ class BlackjackTurn(BaseModel):
     player_id: str
     player_max_hand: str
     dealer_stop: str
-    dealer_hand: list[list[str]]
-    current_hand: list[list[str]]
+    dealer_hand: list[str]
+    current_hand: list[str]
     played_cards: list[str]
