@@ -1,8 +1,11 @@
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 
+from app.dependencies import get_player_state
+from app.models.blackjack_models import BlackjackTurn
+from app.player_state import PlayerState
 from app.startup import start_up_connect
 
 
@@ -10,8 +13,10 @@ from app.startup import start_up_connect
 async def lifespan(_app: FastAPI):
 
     print("Starting Blackjack-Player")
+
     start_up_connect(game_url="http://127.0.0.1:5000",
-                     own_url="http://127.0.0.1:5001")
+                     own_url="http://127.0.0.1:5001",
+                     player_state=get_player_state())
 
     yield
 
@@ -24,8 +29,14 @@ async def root():
     return {"message": "Hello from blackjack player"}
 
 @app.get("/connection-check")
-async def connection_check():
-    return
+async def connection_check(player_state: PlayerState = Depends(get_player_state)):
+    print("Received connection check")
+    return {"player_id": player_state.player_id}
+
+@app.post("/turn")
+async def turn(blackjack_turn: BlackjackTurn):
+    print("Received turn data")
+    return {"message": "Received turn data!"}
 
 
 def start():
