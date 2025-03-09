@@ -41,7 +41,12 @@ async def connection_check(player_state: PlayerState = Depends(get_player_state)
 @app.post("/turn")
 async def turn(blackjack_turn: BlackjackTurn):
     print("Received turn data")
-    return {"message": "Received turn data!"}
+    return {"action": "Stand"}
+
+
+@app.post("/bust")
+async def bust():
+    get_player_state().set_player_bust()
 
 
 def start():
