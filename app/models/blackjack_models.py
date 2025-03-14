@@ -8,3 +8,4 @@ class BlackjackTurn(BaseModel):
     dealer_hand: list[str]
     current_hand: list[str]
     played_cards: list[str]
+    deck_amount: str
