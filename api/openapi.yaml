@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Blackjack API
+  description: An API to handle blackjack game actions and connection checks.
+  version: 1.0.0
+paths:
+  /turn:
+    post:
+      summary: Player's move in a blackjack game
+      description: Receives the game state and player actions, and returns either "Stand" or "Hit".
+      operationId: handleBlackjackTurn
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                player_id:
+                  type: string
+                  description: Unique identifier for the player.
+                player_max_hand:
+                  type: string
+                  description: The maximum hand value for the player.
+                dealer_stop:
+                  type: string
+                  description: The decision point for the dealer to stop.
+                dealer_hand:
+                  type: array
+                  items:
+                    type: string
+                  description: List of cards in the dealer's hand.
+                current_hand:
+                  type: array
+                  items:
+                    type: string
+                  description: List of cards in the player's current hand.
+                played_cards:
+                  type: array
+                  items:
+                    type: string
+                  description: List of cards that have been played.
+                deck_amount:
+                  type: string
+                  description: The amount of decks being used.
+              required:
+                - player_id
+                - player_max_hand
+                - dealer_stop
+                - dealer_hand
+                - current_hand
+                - played_cards
+                - deck_amount
+      responses:
+        '200':
+          description: Action taken by the player (Stand or Hit).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  action:
+                    type: string
+                    enum:
+                      - Stand
+                      - Hit
+                    description: The action taken by the player.
+        '400':
+          description: Bad Request - Invalid input data.
+        '500':
+          description: Internal Server Error.
+
+  /connection-check:
+    get:
+      summary: Checks if the player is still connected
+      description: Used by the blackjack service to ensure this player is still connected.
+      operationId: connectionCheck
+      parameters:
+        - in: query
+          name: player_state
+          required: true
+          schema:
+            type: object
+            properties:
+              player_id:
+                type: string
+                description: Unique identifier for the player.
+      responses:
+        '200':
+          description: Player connection status returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  player_id:
+                    type: string
+                    description: Unique identifier for the player.
+        '400':
+          description: Bad Request - Invalid input data.
+        '500':
+          description: Internal Server Error.
+
+components:
+  schemas:
+    BlackjackTurn:
+      type: object
+      properties:
+        player_id:
+          type: string
+        player_max_hand:
+          type: string
+        dealer_stop:
+          type: string
+        dealer_hand:
+          type: array
+          items:
+            type: string
+        current_hand:
+          type: array
+          items:
+            type: string
+        played_cards:
+          type: array
+          items:
+            type: string
+        deck_amount:
+          type: string
+      required:
+        - player_id
+        - player_max_hand
+        - dealer_stop
+        - dealer_hand
+        - current_hand
+        - played_cards
+        - deck_amount

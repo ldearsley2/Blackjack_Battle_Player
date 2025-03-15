@@ -34,12 +34,22 @@ async def root():
 
 @app.get("/connection-check")
 async def connection_check(player_state: PlayerState = Depends(get_player_state)):
+    """
+    Used by blackjack service to ensure this player is still connected.
+    :param player_state:
+    :return:
+    """
     print("Received connection check")
     return {"player_id": player_state.player_id}
 
 
 @app.post("/turn")
 async def turn(blackjack_turn: BlackjackTurn):
+    """
+    Primary endpoint for blackjack player, receive game and player state, return either Stand or Hit
+    :param blackjack_turn:
+    :return:
+    """
     print("Received turn data")
     return {"action": "Stand"}
 
