@@ -15,7 +15,7 @@ async def lifespan(_app: FastAPI):
 
     start_up_connect(
         game_url="http://127.0.0.1:5000",
-        own_url="http://127.0.0.1:5001",
+        own_url="http://127.0.0.1:5002",
         player_state=get_player_state(),
     )
 
@@ -58,4 +58,8 @@ def start():
 
 
 def start_dev():
-    uvicorn.run("app.main:app", host="127.0.0.1", port=5001, reload=True)
+    uvicorn.run("app.main:app", host="127.0.0.1", port=5001)
+
+
+def start_dev_two():
+    uvicorn.run("app.main:app", host="127.0.0.1", port=5002)
