@@ -15,7 +15,7 @@ async def lifespan(_app: FastAPI):
 
     start_up_connect(
         game_url="http://127.0.0.1:5000",
-        own_url="http://127.0.0.1:5002",
+        own_url="http://127.0.0.1:5001",
         player_state=get_player_state(),
     )
 
