@@ -16,6 +16,7 @@ pydantic-settings = "^2.7.1"
 requests = "^2.32.3"
 ruff = "^0.9.10"
 openapi = "^2.0.0"
+websockets = "^15.0.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
