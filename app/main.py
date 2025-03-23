@@ -49,6 +49,7 @@ async def turn(blackjack_turn: BlackjackTurn):
     print("Received turn data")
     return {"action": "Stand"}
 
+
 def start():
     """
     Start a uvicorn server using the FastAPI app

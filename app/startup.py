@@ -30,4 +30,3 @@ async def start_up_socket(url: str, player_state: PlayerState):
 
         response = await websocket.recv()
         print(response)
-
