@@ -1,5 +1,6 @@
 class PlayerState:
     def __init__(self):
+        self.nickname = "Lucas"
         self.player_id = ""
         self.status = ""
 
