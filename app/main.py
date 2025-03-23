@@ -13,12 +13,6 @@ from app.startup import start_up_connect
 async def lifespan(_app: FastAPI):
     print("Starting Blackjack-Player")
 
-    start_up_connect(
-        game_url="http://127.0.0.1:5000",
-        own_url="http://127.0.0.1:5001",
-        player_state=get_player_state(),
-    )
-
     yield
 
     print("Shutting down player")
@@ -52,11 +46,6 @@ async def turn(blackjack_turn: BlackjackTurn):
     """
     print("Received turn data")
     return {"action": "Stand"}
-
-
-@app.post("/bust")
-async def bust():
-    get_player_state().set_player_bust()
 
 
 def start():
