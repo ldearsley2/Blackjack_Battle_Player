@@ -10,5 +10,6 @@ class BlackjackTurn(BaseModel):
     played_cards: list[str]
     deck_amount: str
 
+
 class ManualConnect(BaseModel):
     player_id: str

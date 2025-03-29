@@ -6,7 +6,6 @@ from fastapi import FastAPI, Depends
 from app.dependencies import get_player_state
 from app.models.blackjack_models import BlackjackTurn, ManualConnect
 from app.player_state import PlayerState
-from app.startup import start_up_connect
 
 
 @asynccontextmanager
@@ -25,8 +24,11 @@ app = FastAPI(title="Blackjack-Battle-Player", lifespan=lifespan)
 async def root():
     return {"message": "Hello from blackjack player"}
 
+
 @app.get("/connect")
-async def connect(manual_connect: ManualConnect, player_state: PlayerState = Depends(get_player_state)):
+async def connect(
+    manual_connect: ManualConnect, player_state: PlayerState = Depends(get_player_state)
+):
     """
     Manual connect endpoint, request received from blackjack controller
     :param manual_connect:
@@ -34,7 +36,7 @@ async def connect(manual_connect: ManualConnect, player_state: PlayerState = Dep
     :return:
     """
     player_state.set_player_id(manual_connect.player_id)
-    return{"nickname": player_state.nickname, "player_id": manual_connect.player_id}
+    return {"nickname": player_state.nickname, "player_id": manual_connect.player_id}
 
 
 @app.get("/connection-check")
