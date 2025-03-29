@@ -4,6 +4,7 @@ import uvicorn
 from fastapi import FastAPI, Depends
 
 from app.dependencies import get_player_state
+from app.logic import take_turn
 from app.models.blackjack_models import BlackjackTurn, ManualConnect
 from app.player_state import PlayerState
 
@@ -57,8 +58,8 @@ async def turn(blackjack_turn: BlackjackTurn):
     :param blackjack_turn:
     :return:
     """
-    print("Received turn data")
-    return {"action": "Stand"}
+    choice = take_turn(blackjack_turn)
+    return choice
 
 
 def start():
