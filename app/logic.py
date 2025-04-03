@@ -1,9 +1,11 @@
+from enum import Enum
+
 from app.models.blackjack_models import BlackjackTurn
 
 """
 player_id - The ID of this blackjack player,
 player_max_hand - The max hand value before being bust,
-dealer_stop - The hand value when the dealer stops pulling cards,
+dealer_stop - The dealers hand value when the dealer stops pulling cards,
 dealer_hand - The current cards in the dealers hand,
 current_hand - The current cards in the players hand,
 played_cards - All previously played cards before shuffling,
@@ -21,11 +23,16 @@ example_blackjack_turn = {
 }
 
 
-def take_turn(blackjack_turn: BlackjackTurn) -> dict:
+class TurnAction(Enum):
+    HIT = "Hit"
+    STAND = "Stand"
+
+
+def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     """
-    Received all data needed to decide what action to take,
-    should return either {"action": "Stand"} or {"action": "Hit"}.
+    Receives all data needed to decide what action to take,
+    should return either TurnAction.HIT or TurnAction.STAND.
     :param blackjack_turn:
     :return:
     """
-    return {"action": "Stand"}
+    return TurnAction.STAND

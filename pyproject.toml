@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "blackjack-battle-player"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = ["ldearsley2 <ldearsley2@gmail.com>"]
 readme = "README.md"
