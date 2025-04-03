@@ -1,6 +1,6 @@
 # Blackjack_Battle_Player
 
-A Blackjack game player to be deployed within Cloud Run. All turn logic should be put in logic.py
+A Blackjack game player to be deployed within Cloud Run. All turn logic should be put in app/logic.py
 
 
 ## Installation

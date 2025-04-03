@@ -28,7 +28,7 @@ async def connect(
     :return:
     """
     player_state.set_player_id(manual_connect.player_id)
-    return {"nickname": player_state.nickname, "player_id": manual_connect.player_id}
+    return {"nickname": player_state.get_player_nickname(), "player_id": manual_connect.player_id}
 
 
 @router.get("/connection-check")
@@ -39,7 +39,7 @@ async def connection_check(player_state: PlayerState = Depends(get_player_state)
     :return:
     """
     print("Received connection check")
-    return {"player_id": player_state.player_id}
+    return {"player_id": player_state.get_player_id()}
 
 
 @router.post("/turn")

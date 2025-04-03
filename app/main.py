@@ -1,3 +1,4 @@
+import logging
 from contextlib import asynccontextmanager
 
 import uvicorn
@@ -5,14 +6,21 @@ from fastapi import FastAPI
 
 from app.routes import router
 
+logger = logging.getLogger(__name__)
+
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    print("Starting Blackjack-Player")
+    """
+    Define the lifespan of the FastAPI app, everything after yield occurs on app shutdown.
+    :param _app:
+    :return:
+    """
+    logger.info("Starting Blackjack_Player")
 
     yield
 
-    print("Shutting down player")
+    logger.info("Shutting down Blackjack_Player")
 
 
 app = FastAPI(title="Blackjack-Battle-Player", lifespan=lifespan)
