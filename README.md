@@ -1,6 +1,6 @@
 # Blackjack_Battle_Player
 
-A Blackjack game player to be deployed within Cloud Run. All turn logic should be put in turn.py
+A Blackjack game player to be deployed within Cloud Run. All turn logic should be put in app/logic.py
 
 
 ## Installation
@@ -31,6 +31,3 @@ CONTROLLER_URL: "The URL for the cloud run blackjack battle controller"
 GAME_URL: "The URL for the cloud run instance of this player"
 PLAYER_NICKNAME: "The player nickname used throughout the game"
 ```
-
-To deploy this project in Cloud Run:
-- Expose port 5000 

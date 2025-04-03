@@ -1,65 +1,30 @@
+import logging
 from contextlib import asynccontextmanager
 
 import uvicorn
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 
-from app.dependencies import get_player_state
-from app.logic import take_turn
-from app.models.blackjack_models import BlackjackTurn, ManualConnect
-from app.player_state import PlayerState
+from app.routes import router
+
+logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    print("Starting Blackjack-Player")
+    """
+    Define the lifespan of the FastAPI app, everything after yield occurs on app shutdown.
+    :param _app:
+    :return:
+    """
+    logger.info("Starting Blackjack_Player")
 
     yield
 
-    print("Shutting down player")
+    logger.info("Shutting down Blackjack_Player")
 
 
 app = FastAPI(title="Blackjack-Battle-Player", lifespan=lifespan)
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello from blackjack player"}
-
-
-@app.get("/connect")
-async def connect(
-    manual_connect: ManualConnect, player_state: PlayerState = Depends(get_player_state)
-):
-    """
-    Manual connect endpoint, request received from blackjack controller
-    :param manual_connect:
-    :param player_state:
-    :return:
-    """
-    player_state.set_player_id(manual_connect.player_id)
-    return {"nickname": player_state.nickname, "player_id": manual_connect.player_id}
-
-
-@app.get("/connection-check")
-async def connection_check(player_state: PlayerState = Depends(get_player_state)):
-    """
-    Used by blackjack service to ensure this player is still connected.
-    :param player_state:
-    :return:
-    """
-    print("Received connection check")
-    return {"player_id": player_state.player_id}
-
-
-@app.post("/turn")
-async def turn(blackjack_turn: BlackjackTurn):
-    """
-    Primary endpoint for blackjack player, receive game and player state, return either Stand or Hit
-    :param blackjack_turn:
-    :return:
-    """
-    choice = take_turn(blackjack_turn)
-    return choice
+app.include_router(router)
 
 
 def start():
@@ -71,8 +36,8 @@ def start():
 
 
 def start_dev():
+    """
+    Start a local uvicorn servicer using the FastAPI app
+    :return:
+    """
     uvicorn.run("app.main:app", host="127.0.0.1", port=5001)
-
-
-def start_dev_two():
-    uvicorn.run("app.main:app", host="127.0.0.1", port=5002)
