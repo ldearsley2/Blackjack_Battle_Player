@@ -29,7 +29,7 @@ def get_score(card: str) -> list[int]:
     value = card[:-1]
 
     if value == ACE:
-        return [1, 10]
+        return [1, 11]
     elif value.isdigit():
         return [int(value)]
 

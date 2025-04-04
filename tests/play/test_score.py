@@ -14,7 +14,7 @@ class TestScore(unittest.TestCase):
         self.assertEqual([10], get_score("QS"))
 
     def test_ace(self):
-        self.assertEqual([1, 10], get_score("AH"))
+        self.assertEqual([1, 11], get_score("AH"))
 
 
 class TestTotal(unittest.TestCase):
@@ -26,6 +26,6 @@ class TestTotal(unittest.TestCase):
         self.assertEqual([17], get_total(["5H", "JS", "2C"]))
 
     def test_aces(self):
-        self.assertEqual([4, 13], get_total(["AH", "3S"]))
-        self.assertEqual([10, 19, 28], get_total(["6S", "AH", "2C", "AC"]))
-        self.assertEqual([11, 20, 29, 38, 47], get_total(["AS", "AH", "2C", "AC", "5D", "AD"]))
+        self.assertEqual([4, 14], get_total(["AH", "3S"]))
+        self.assertEqual([10, 20, 30], get_total(["6S", "AH", "2C", "AC"]))
+        self.assertEqual([11, 21, 31, 41, 51], get_total(["AS", "AH", "2C", "AC", "5D", "AD"]))
