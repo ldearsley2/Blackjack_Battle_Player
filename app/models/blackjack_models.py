@@ -1,3 +1,5 @@
+from enum import Enum
+
 from pydantic import BaseModel
 
 
@@ -13,3 +15,8 @@ class BlackjackTurn(BaseModel):
 
 class ManualConnect(BaseModel):
     player_id: str
+
+
+class TurnAction(Enum):
+    HIT = "Hit"
+    STAND = "Stand"

@@ -1,6 +1,5 @@
-from enum import Enum
-
-from app.models.blackjack_models import BlackjackTurn
+from app.models.blackjack_models import BlackjackTurn, TurnAction
+from app.play.turn import play
 
 """
 player_id - The ID of this blackjack player,
@@ -23,11 +22,6 @@ example_blackjack_turn = {
 }
 
 
-class TurnAction(Enum):
-    HIT = "Hit"
-    STAND = "Stand"
-
-
 def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     """
     Receives all data needed to decide what action to take,
@@ -35,4 +29,4 @@ def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     :param blackjack_turn:
     :return:
     """
-    return TurnAction.STAND
+    return play(blackjack_turn)
