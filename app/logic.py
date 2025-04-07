@@ -1,6 +1,6 @@
 from enum import Enum
 
-from app.models.blackjack_models import BlackjackTurn
+from app.models.blackjack_models import BlackjackTurn, BlackjackBet
 
 """
 player_id - The ID of this blackjack player,
@@ -36,3 +36,13 @@ def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     :return:
     """
     return TurnAction.STAND
+
+
+def make_bet(blackjack_bet: BlackjackBet) -> int:
+    """
+    Received player_id and current points, should return the amount of points that are being bet.
+    If returned points are larger than the players current, they are disqualified.
+    :param blackjack_bet:
+    :return:
+    """
+    return 2
