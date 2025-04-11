@@ -1,7 +1,7 @@
 from enum import Enum
 
 from app.models.blackjack_models import BlackjackTurn, BlackjackBet
-from app.play.turn import play
+from app.play.turn import play, Result
 
 """
 player_id - The ID of this blackjack player,
@@ -36,7 +36,11 @@ def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     :param blackjack_turn:
     :return:
     """
-    return play(blackjack_turn)
+    result: Result = play(blackjack_turn)
+    if result == Result.HIT:
+        return TurnAction.HIT
+
+    return TurnAction.STAND
 
 
 def make_bet(blackjack_bet: BlackjackBet) -> int:

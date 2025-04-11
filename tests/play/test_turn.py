@@ -1,7 +1,7 @@
 import unittest
 
-from app.models.blackjack_models import BlackjackTurn, TurnAction
-from app.play.turn import play
+from app.models.blackjack_models import BlackjackTurn
+from app.play.turn import play, Result
 
 
 class TestPlay(unittest.TestCase):
@@ -29,9 +29,9 @@ class TestPlay(unittest.TestCase):
     def test_hit(self):
         self.b.current_hand = ["AH", "3S"]
         actual = play(self.b)
-        self.assertEqual(TurnAction.HIT, actual)
+        self.assertEqual(Result.HIT, actual)
 
     def test_stand(self):
         self.b.current_hand = ["AH", "6C", "AD"]
         actual = play(self.b)
-        self.assertEqual(TurnAction.STAND, actual)
+        self.assertEqual(Result.STAND, actual)

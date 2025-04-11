@@ -20,8 +20,3 @@ class BlackjackBet(BaseModel):
 
 class ManualConnect(BaseModel):
     player_id: str
-
-
-class TurnAction(Enum):
-    HIT = "Hit"
-    STAND = "Stand"

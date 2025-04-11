@@ -1,12 +1,19 @@
-from app.models.blackjack_models import BlackjackTurn, TurnAction
+from enum import Enum
+
+from app.models.blackjack_models import BlackjackTurn
 from app.play.score import get_total
 
 
-def play(b: BlackjackTurn) -> TurnAction:
+class Result(Enum):
+    HIT = "Hit"
+    STAND = "Stand"
+
+
+def play(b: BlackjackTurn) -> Result:
     hand: list[str] = b.current_hand
     possible_totals = get_total(hand)
     for total in possible_totals:
         if int(b.dealer_stop) < total <= int(b.player_max_hand):
-            return TurnAction.STAND
+            return Result.STAND
 
-    return TurnAction.HIT
+    return Result.HIT
