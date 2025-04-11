@@ -1,5 +1,6 @@
-from app.models.blackjack_models import BlackjackTurn, TurnAction
-from app.play.turn import play
+from enum import Enum
+
+from app.models.blackjack_models import BlackjackTurn, BlackjackBet
 
 """
 player_id - The ID of this blackjack player,
@@ -22,6 +23,11 @@ example_blackjack_turn = {
 }
 
 
+class TurnAction(Enum):
+    HIT = "Hit"
+    STAND = "Stand"
+
+
 def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     """
     Receives all data needed to decide what action to take,
@@ -29,4 +35,14 @@ def take_turn(blackjack_turn: BlackjackTurn) -> TurnAction:
     :param blackjack_turn:
     :return:
     """
-    return play(blackjack_turn)
+    return TurnAction.STAND
+
+
+def make_bet(blackjack_bet: BlackjackBet) -> int:
+    """
+    Received player_id and current points, should return the amount of points that are being bet.
+    If returned points are larger than the players current, they are disqualified.
+    :param blackjack_bet:
+    :return:
+    """
+    return 2
